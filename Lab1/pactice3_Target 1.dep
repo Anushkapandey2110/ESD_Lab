@@ -1,0 +1,2 @@
+Dependencies for Project 'pactice3', Target 'Target 1': (DO NOT MODIFY !)
+F (.\text5.asm)(0x669DF140)(--cpu Cortex-M3 --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\NXP\LPC17xx --list "text5.lst" --xref -o "text5.o" --depend "text5.d")
