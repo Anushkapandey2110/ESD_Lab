@@ -1,0 +1,180 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             RESET,DATA,READONLY
+    2 00000000                 EXPORT           __Vectors
+    3 00000000         __Vectors
+    4 00000000 10001000        DCD              0X10001000  ;stack pointer valu
+                                                            e when stack is emp
+                                                            ty
+    5 00000004 00000000        DCD              Reset_Handler ;Reset Vectors
+    6 00000008                 ALIGN
+    7 00000008                 AREA             mycode, CODE, READONLY
+    8 00000000                 EXPORT           Reset_Handler
+    9 00000000         Reset_Handler
+   10 00000000 4811            LDR              R0, =N1     ;to store the addre
+                                                            ss of first 128 bit
+                                                             number
+   11 00000002 4912            LDR              R1, =N2     ;to store the addre
+                                                            ss of second 128 bi
+                                                            t number
+   12 00000004         ; R2 will store the sum (r7+r8)
+   13 00000004         ;R5 will be the counter 
+   14 00000004         ;R6 will point to the difference in data memory
+   15 00000004         ;R7 will store the values of N1
+   16 00000004         ;R8 will store the values of N2 
+   17 00000004 F04F 0504       MOV              R5,#4
+   18 00000008 4E11            LDR              R6, =diff
+   19 0000000A 2A00            CMP              R2,#0       ;to ensure that car
+                                                            ry is one before en
+                                                            tering loop
+   20 0000000C F850 7B04 
+                       BACK    LDR              R7,[R0],#4  ;STORING N1
+   21 00000010 F851 8B04       LDR              R8,[R1],#4  ;STORING N2
+   22 00000014 EB77 0208       SBCS             R2,R7,R8    ; R2=R7-R8-(1-C)
+   23 00000018 F846 2B04       STR              R2,[R6],#4  ; IT WILL STORE THE
+                                                             DIFFERENCE OF  32 
+                                                            BIT NUMBERS TO THE 
+                                                            DATA MEMORY
+   24 0000001C F1A5 0501       SUB              R5,#1       ; NOT SUBS SINCE IT
+                                                             WILL UPDATE THE CA
+                                                            RRY FLAG AND WE NEE
+                                                            D THAT CARRY IN THE
+                                                             NEXT ITERATION
+   25 00000020 F095 0F00       TEQ              R5,#0
+   26 00000024 D1F2            BNE              BACK
+   27 00000026 E7FE    STOP    B                STOP
+   28 00000028 00001234 
+              37485968 
+              00000012 
+              17365908 N1      DCD              0X1234,0X37485968,0X12,0X173659
+08
+   29 00000038 00012438 
+              000AB564 
+              00017389 
+              12343567 N2      DCD              0X12438,0XAB564,0X17389,0X12343
+567
+   30 00000048 00000000 
+              00000000 
+              00000000         AREA             mydata, DATA, READWRITE
+   31 00000000 00000000 
+              00000000 
+              00000000 
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+              00000000 
+              00000000 diff    DCD              0,0,0,0,0
+   32 00000014                 END
+Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=q3.d -oq
+3.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\Inc\NXP\LP
+C17xx --predefine="__EVAL SETA 1" --list=q3.lst q3.asm
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 1 in file q3.asm
+   Uses
+      None
+Comment: RESET unused
+__Vectors 00000000
+
+Symbol: __Vectors
+   Definitions
+      At line 3 in file q3.asm
+   Uses
+      At line 2 in file q3.asm
+Comment: __Vectors used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+BACK 0000000C
+
+Symbol: BACK
+   Definitions
+      At line 20 in file q3.asm
+   Uses
+      At line 26 in file q3.asm
+Comment: BACK used once
+N1 00000028
+
+Symbol: N1
+   Definitions
+      At line 28 in file q3.asm
+   Uses
+      At line 10 in file q3.asm
+Comment: N1 used once
+N2 00000038
+
+Symbol: N2
+   Definitions
+      At line 29 in file q3.asm
+   Uses
+      At line 11 in file q3.asm
+Comment: N2 used once
+Reset_Handler 00000000
+
+Symbol: Reset_Handler
+   Definitions
+      At line 9 in file q3.asm
+   Uses
+      At line 5 in file q3.asm
+      At line 8 in file q3.asm
+
+STOP 00000026
+
+Symbol: STOP
+   Definitions
+      At line 27 in file q3.asm
+   Uses
+      At line 27 in file q3.asm
+Comment: STOP used once
+mycode 00000000
+
+Symbol: mycode
+   Definitions
+      At line 7 in file q3.asm
+   Uses
+      None
+Comment: mycode unused
+6 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+diff 00000000
+
+Symbol: diff
+   Definitions
+      At line 31 in file q3.asm
+   Uses
+      At line 18 in file q3.asm
+Comment: diff used once
+mydata 00000000
+
+Symbol: mydata
+   Definitions
+      At line 30 in file q3.asm
+   Uses
+      None
+Comment: mydata unused
+2 symbols
+343 symbols in table
